@@ -261,57 +261,53 @@
       </header>
       <div class="nav-scroller py-1 mb-3 border-bottom">
         <nav class="nav nav-underline justify-content-between">
-          <a class="nav-item nav-link link-body-emphasis active" href="#"
-            >World</a
-          >
-          <a class="nav-item nav-link link-body-emphasis" href="#">U.S.</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#"
-            >Technology</a
-          >
-          <a class="nav-item nav-link link-body-emphasis" href="#">Design</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Health</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Style</a>
-          <a class="nav-item nav-link link-body-emphasis" href="#">Travel</a>
+          {% for cat in categories %}
+          <a class="nav-item nav-link link-body-emphasis" href="#">{{ cat.category_name}}</a>
+          {% endfor %}
+          
         </nav>
       </div>
     </div>
     <main class="container">
-      <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="background-image: url({% static 'images/Minato_party.jpeg'%}) ; background-blend-mode:overlay; background-size: cover;">
-        <div class="col-lg-6 px-0">
-          <h1 class="display-4 fst-italic">
-            Title of a longer featured blog post
-          </h1>
-          <p class="lead my-3">
-            Multiple lines of text that form the lede, informing new readers
-            quickly and efficiently about what’s most interesting in this post’s
-            contents.
-          </p>
-          <p class="lead mb-0">
-            <a href="#" class="text-body-emphasis fw-bold"
-              >Continue reading...</a
-            >
-          </p>
+      
+      {% for post in featured_posts%}
+        {% if forloop.first %}
+        <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="background-image: url({{ post.featured_image.url }}) ; background-blend-mode:overlay; background-size: cover;">
+          <div class="col-lg-6 px-0">
+            <h1 class="display-4 fst-italic">
+              {{ post.title }}
+            </h1>
+            <p class="lead my-3">
+              {{ post.short_description }}
+            </p>
+            <p class="lead mb-0">
+              <a href="#" class="text-body-emphasis fw-bold"
+                >Continue reading...</a
+              >
+            </p>
+          </div>
         </div>
-      </div>
+        {% endif %}
+      {% endfor %}
+      
       <div class="row mb-2">
+
+        {% for post in featured_posts %}
+          {% if not forloop.firts %}
         <div class="col-md-6">
           <div
             class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
           >
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary-emphasis"
-                >World</strong
+                >{{ post.title }}</strong
               >
               <h3 class="mb-0">Featured post</h3>
-              <div class="mb-1 text-body-secondary">Nov 12</div>
+              <div class="mb-1 text-body-secondary">{{ post.created_at|timesince }} ago | {{ post.author}}</div>
               <p class="card-text mb-auto">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content.
+                  
+                {{ post.short_description }}
+                
               </p>
               <a
                 href="#"
@@ -340,52 +336,14 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div
-            class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
-          >
-            <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-success-emphasis"
-                >Design</strong
-              >
-              <h3 class="mb-0">Post title</h3>
-              <div class="mb-1 text-body-secondary">Nov 11</div>
-              <p class="mb-auto">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content.
-              </p>
-              <a
-                href="#"
-                class="icon-link gap-1 icon-link-hover stretched-link"
-              >
-                Continue reading
-                <svg class="bi" aria-hidden="true">
-                  <use xlink:href="#chevron-right"></use>
-                </svg>
-              </a>
-            </div>
-            <div class="col-auto d-none d-lg-block">
-              <svg
-                aria-label="Placeholder: Thumbnail"
-                class="bd-placeholder-img"
-                height="250"
-                preserveAspectRatio="xMidYMid slice"
-                role="img"
-                width="200"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-            </div>
-          </div>
-        </div>
+          {% endif %}
+        {% endfor %}
       </div>
       <div class="row g-5">
         <div class="col-md-8">
           <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
           <article class="blog-post">
+
             <h2 class="display-5 link-body-emphasis mb-1">Sample blog post</h2>
             <p class="blog-post-meta">
               January 1, 2021 by <a href="#">Mark</a>
@@ -403,6 +361,8 @@
               keep the demonstration flowing, so be on the lookout for this
               exact same string of text.
             </p>
+
+            
             <h2>Blockquotes</h2>
             <p>This is an example blockquote in action:</p>
             <blockquote class="blockquote">

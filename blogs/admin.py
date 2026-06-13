@@ -16,6 +16,7 @@ class BlogAdmin(admin.ModelAdmin):
 
     
     search_fields = ('id', 'title', 'category__category_name', 'author__username', 'status')
+    list_editable = ('is_featured',)
 
 # Register your models here.
 admin.site.register(Category)
