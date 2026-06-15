@@ -1,3 +1,17 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post_by_category</title>
+</head>
+<body>
+    {% for i in posts %}
+    {{i}} <br>
+    {% endfor %}
+</body>
+</html> -->
+
 {% load static %}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -358,9 +372,9 @@
       </div>
       <div class="row g-5">
         <div class="col-md-8">
-          <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
+          <h3 class="pb-4 mb-4 fst-italic border-bottom">Category</h3>
           <article class="blog-post">
-
+            {% if posts %}
             {% for post in posts %}
             <h2 class="display-5 link-body-emphasis mb-1">{{ post.title }}</h2>
             <p class="blog-post-meta">
@@ -374,6 +388,9 @@
               {{ post.blog_body | truncatewords:100 }}
             </p>
             {% endfor %}
+            {% else %}
+            <p>No posts found</p>
+            {% endif %}
             
             <h2>Blockquotes</h2>
             <p>This is an example blockquote in action:</p>
@@ -720,8 +737,8 @@
     <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
       <p>
         Blog template built for
-        <a href="https://getbootstrap.com/">Love</a> by
-        <a href="https://x.com/mdo">@Jubaiyer</a>.
+        <a href="https://getbootstrap.com/">Bootstrap</a> by
+        <a href="https://x.com/mdo">@mdo</a>.
       </p>
       <p class="mb-0"><a href="#">Back to top</a></p>
     </footer>
