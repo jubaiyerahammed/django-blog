@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from .forms import RegistrationForm
 from about.models import About
 from blogs.models import Category, Blog 
 
@@ -29,3 +30,10 @@ def search(request):
         'results': results
     }
     return render(request, 'search.html', context)
+
+def register (request):
+    form= RegistrationForm()
+    context={
+        'form':form
+    }
+    return render (request, 'register.html', context )
