@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import RegistrationForm
 from about.models import About
 from blogs.models import Category, Blog 
+from django.contrib.auth.forms import AuthenticationForm
 
 def home (request):
     #categories = Category.objects.all()
@@ -46,3 +47,11 @@ def register (request):
         'form':form
     }
     return render (request, 'register.html', context )
+
+
+def login(request):
+    form = AuthenticationForm()
+    context={
+        'form':form
+    }
+    return render (request, 'login.html', context)
