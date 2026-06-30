@@ -250,7 +250,7 @@
             <a class="btn btn-sm btn-outline-secondary ms-2" href="{% url 'login' %}">Login</a>
             <a class="btn btn-sm btn-warning ms-2" href="{% url 'register' %}">Register</a>
             {% else %}
-            <span>{{ user }}</span>
+            <span><a href="{% url 'deshboard' %}">Deshboard</a></span>
             &emsp;
             
             <span><a href="{% url 'logout' %}">Logout</a></span>
