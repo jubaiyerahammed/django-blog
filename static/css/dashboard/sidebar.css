@@ -1,0 +1,78 @@
+/* leftbar */
+.list-group-item{
+    border: none;
+    padding: 14px 18px;
+    font-weight: 500;
+    transition: all .3s ease;
+}
+
+.list-group-item:hover{
+    background: #ffc107;
+    color: #000;
+    padding-left: 25px;
+}
+
+.list-group-item.active{
+    background: #ffc107;
+    color: #000;
+    font-weight: 600;
+}
+.sidebar-active{
+    background-color: #ffc107;
+    color: #000 !important;
+    font-weight: 600;
+}
+
+.card{
+    overflow: hidden;
+}
+
+
+
+/* Rightbar */
+/* Welcome Card */
+.card h4{
+    font-weight: 700;
+}
+
+/* Dashboard Card */
+
+.dashboard-card{
+    border-radius: 15px;
+    transition: .3s ease;
+}
+
+.dashboard-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.12) !important;
+}
+
+/* Icon */
+
+.dashboard-icon{
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#fff;
+
+    font-size:30px;
+}
+
+/* Card Number */
+
+.dashboard-card h2{
+    font-size:38px;
+    font-weight:700;
+}
+
+/* Card Title */
+
+.dashboard-card h6{
+    letter-spacing:1px;
+}

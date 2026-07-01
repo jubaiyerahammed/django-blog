@@ -1,0 +1,41 @@
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard/sidebar.css' %}">
+{% endblock %}
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0 rounded-3">
+            <!-- Sidebar Menu -->
+            <div class="list-group list-group-flush">
+
+                <a href="{% url 'deshboard' %}"
+                    class="list-group-item list-group-item-action
+                    {% if '/deshboard/' == request.path %}sidebar-active{% endif %}">
+                    Deshboard
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    Users
+                </a>
+                <a href="{% url 'categories' %}"
+                    class="list-group-item list-group-item-action
+                    {% if '/categories/' in request.path %}sidebar-active{% endif %}">
+                    Categories
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    Posts
+                </a>            
+                <a href="#" class="list-group-item list-group-item-action">
+                    ⚙️ Settings
+                </a>
+
+            </div>
+
+            <!-- Logout -->
+            <div class="card-footer bg-white">
+                <a href="#" class="btn btn-outline-danger w-100">
+                    Logout
+                </a>
+            </div>
+
+        </div>
+    </div>

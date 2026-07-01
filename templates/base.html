@@ -26,6 +26,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    {% block extra_css %}{% endblock %}
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -250,10 +251,14 @@
             <a class="btn btn-sm btn-outline-secondary ms-2" href="{% url 'login' %}">Login</a>
             <a class="btn btn-sm btn-warning ms-2" href="{% url 'register' %}">Register</a>
             {% else %}
-            <span><a href="{% url 'deshboard' %}">Deshboard</a></span>
-            &emsp;
             
-            <span><a href="{% url 'logout' %}">Logout</a></span>
+            <span><a class="btn btn-sm btn-outline-secondary" href="{% url 'deshboard' %}">Deshboard</a></span>              
+            
+            &emsp;             
+            
+            <span><a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}">Logout</a></span>
+            
+            
             {% endif %}
           </div>
         </div>
@@ -267,27 +272,31 @@
           
         </nav>
       </div>
+      <!-- Main content part -->
+      {% block content %}
+      {% endblock %}
     </div>
 
 
-<!-- Main content part -->
 
-{% block content %}
-
-{% endblock %}
 
 <!-- Footer part -->
 
-  <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
-    <div class="container">
-      <p>
-        Blog template built for
-        <a href="https://getbootstrap.com/"> </a>  💡by
-        <a href="https://x.com/mdo">@Jubaiyer</a>.
-      </p>
-      <p class="mb-0"><a href="#">Back to top</a></p>
-    </div>
-  </footer>
+
+    <div class="container">   
+      <footer class="footer py-5 bg-body-tertiary text-center">
+
+          <p class="text-muted mb-3">
+              Designed &amp; Developed with ❤️ by
+              <a href="https://x.com/Juba2886" target="_blank">Jubaiyer</a>
+          </p>
+
+          <a href="#" class="btn btn-outline-secondary btn-sm rounded-pill">
+              Back to Top
+          </a>
+
+      </footer>
+    </div>  
     <script
       src="{% static 'js/bootstrap.bundle.min.js' %}"
       class="astro-vvvwv3sm"
