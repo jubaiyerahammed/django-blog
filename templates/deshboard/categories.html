@@ -31,6 +31,41 @@
 
         <!-- Dashboard Cards -->
         <div class="row g-4">
+            
+           <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="mb-0">CATEGORY</h2>
+
+                <a href="{% url 'add_category' %}" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Add New
+                </a>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>CATEGORY NAME</th>
+                    <th>CREATED AT</th>
+                    <th>UPDATED AT</th>
+                    <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cat in categories %}
+                    <tr>
+                        <th>{{ forloop.counter}}</th>
+                        <td>{{ cat }}</td>
+                        <td>{{ cat.created_at}}</td>
+                        <td>{{ cat.updated_at }}</td>
+                        <td>
+                            <a href=""><i class="fa fa-pencil text-success" style="font-size:24px" ></i></a>
+                            &nbsp;
+                            <a href=""><i class="fa fa-trash text-danger" style="font-size:24px"></i></a>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
             
             

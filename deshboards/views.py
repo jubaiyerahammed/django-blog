@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import CategoryForm
 from blogs.models import Category,Blog
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -16,3 +17,10 @@ def deshboard(request):
 
 def categories(request):
     return render (request, 'deshboard/categories.html')
+
+def add_category(request):
+    form= CategoryForm()
+    context={
+        'form':form
+    }
+    return render(request, 'deshboard/add_category.html', context)
