@@ -261,7 +261,10 @@
             
             &emsp;             
             
-            <span><a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}">Logout</a></span>
+            <span><a href="{% url 'logout' %}" class="btn btn-sm btn-outline-danger custom-logout-btn">
+                  Logout
+                  </a>
+            </span>
             
             
             {% endif %}
