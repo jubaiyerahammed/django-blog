@@ -58,6 +58,19 @@ def posts (request):
     return render (request, 'deshboard/posts.html', context)
 
 def add_post(request):
+    if request.method=='POST':
+        form=BlogPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            
+            post=form.save(commit=False) #temporarily saving the form
+            post.author=request.user
+            post.save()
+            return redirect('posts')
+        else:
+            print('form is invalid')
+            print(form.errors)
+
+        
     form= BlogPostForm()
     context={
         'form':form
