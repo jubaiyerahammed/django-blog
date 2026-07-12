@@ -52,23 +52,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for post in posts %}
-                    <tr>
-                        <th>{{ forloop.counter}}</th>
-                        <td>{{ post.title }}</td>
-                        <td>{{ post.category}}</td>
-                        <td>{{ post.author }}</td>
-                        <td>{{ post.is_featured}}</td>
-                        <td>{{post.status}}</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil text-success" style="font-size:24px" ></i></a>
-                            &nbsp;
-                            <a href=""><i class="fa fa-trash text-danger" style="font-size:24px"></i></a>
-
-                        </td>
-                    </tr>
-                    {% endfor %}
+                    {% if posts %}
+                        {% for post in posts %}
+                        <tr>
+                            <th>{{ forloop.counter }}</th>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.category }}</td>
+                            <td>{{ post.author }}</td>
+                            <td>{{ post.status }}</td>
+                            <td>{{ post.is_featured }}</td>
+                            <td>
+                                <a href=""><i class="fa fa-pencil text-success" style="font-size:24px"></i></a>
+                                &nbsp;
+                                <a href=""><i class="fa fa-trash text-danger" style="font-size:24px"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">
+                                No posts found
+                            </td>
+                        </tr>
+                    {% endif %}
                 </tbody>
+
             </table>
 
             

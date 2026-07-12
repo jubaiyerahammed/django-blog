@@ -7,7 +7,7 @@ from django.db.models import Q
 
 def post_by_category(request, category_id ):
 
-    posts = Blog.objects.filter( status='Published', category=category_id)
+    posts = Blog.objects.filter( status='Published', category=category_id, author=request.user)
     # try:
     #     category = Category.objects.get(pk=category_id)
     # except:

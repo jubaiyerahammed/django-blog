@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import BlogPostForm, CategoryForm
 from blogs.models import Category,Blog
 from django.contrib.auth.decorators import login_required
+from django.utils.text import slugify
 # Create your views here.
 
 @login_required(login_url='login')  #এটা Django‑র একটা ডেকোরেটর।
@@ -51,7 +52,7 @@ def delete_category(request, pk):
     return redirect('categories')
  
 def posts (request):
-    posts=Blog.objects.all()
+    posts=Blog.objects.filter(author=request.user)
     context={
         'posts':posts
     }
@@ -64,6 +65,7 @@ def add_post(request):
             
             post=form.save(commit=False) #temporarily saving the form
             post.author=request.user
+            post.slug = slugify(post.title)   # FIXED
             post.save()
             return redirect('posts')
         else:
