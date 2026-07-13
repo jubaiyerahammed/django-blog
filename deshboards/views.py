@@ -3,6 +3,8 @@ from .forms import BlogPostForm, CategoryForm
 from blogs.models import Category,Blog
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 @login_required(login_url='login')  #এটা Django‑র একটা ডেকোরেটর।
@@ -62,10 +64,11 @@ def add_post(request):
     if request.method=='POST':
         form=BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
-            
-            post=form.save(commit=False) #temporarily saving the form
-            post.author=request.user
-            post.slug = slugify(post.title)   # FIXED
+            post = form.save(commit=False) # temporarily saving the form
+            post.author = request.user
+            post.save()
+            title = form.cleaned_data['title']
+            post.slug = slugify(title) + '-'+str(post.id)
             post.save()
             return redirect('posts')
         else:
@@ -78,3 +81,34 @@ def add_post(request):
         'form':form
     }
     return render (request, 'deshboard/add_post.html', context)
+
+def edit_post(request, pk):
+    post=get_object_or_404(Blog,pk=pk)
+    if request.method=='POST':
+        form=BlogPostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save()
+            title = form.cleaned_data['title']
+            post.slug = slugify(title) + '-'+str(post.id)
+            post.save()
+            return redirect('posts')  
+    form= BlogPostForm(instance=post)
+  
+    context={
+        'form':form,
+        'post':post
+    }
+    return render (request, 'deshboard/edit_post.html', context)
+
+
+def delete_post(request, pk):
+    post= get_object_or_404(Blog, pk=pk)
+    post.delete()
+    return redirect('posts')
+
+def users(request):
+    users= User.objects.all()
+    context={
+        'users':users
+    }
+    return render (request, 'deshboard/users.html', context)

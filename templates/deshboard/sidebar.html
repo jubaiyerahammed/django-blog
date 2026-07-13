@@ -13,7 +13,9 @@
                     {% if '/deshboard/' == request.path %}sidebar-active{% endif %}">
                     Deshboard
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{% url 'users' %}" 
+                class="list-group-item list-group-item-action
+                {% if '/users/' in request.path %}sidebar-active{% endif %}">
                     Users
                 </a>
                 <a href="{% url 'categories' %}"
