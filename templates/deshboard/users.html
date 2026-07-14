@@ -31,14 +31,15 @@
 
         <!-- Dashboard Cards -->
         <div class="row g-4">
-            
-           <div class="d-flex justify-content-between align-items-center mb-3">
+            {% if perms.auth.add_user %}
+            <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="mb-0">ALL USERS</h2>
 
-                <a href="{% url 'add_post' %}" class="btn btn-success">
+                <a href="{% url 'add_user' %}" class="btn btn-success">
                     <i class="fa fa-plus"></i> Add New
                 </a>
             </div>
+
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -60,11 +61,11 @@
                             <td>{{ user.first_name }} {{ user.last_name }}</td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
-                            <td>{{ user.is_active }}</td>
-                            <td>{{ user.is_staff }}</td>
-                            <td>{{ user.is_superuser}}</td>
+                            <td>{% if user.is_active %}<i class="fa fa-check text-success"></i>{% else %}<i class="fa fa-times text-danger"></i>{% endif %}</td>
+                            <td>{% if user.is_staff %}<i class="fa fa-check text-success"></i>{% else %}<i class="fa fa-times text-danger"></i>{% endif %}</td>
+                            <td>{% if user.is_superuser %}<i class="fa fa-check text-success"></i>{% else %}<i class="fa fa-times text-danger"></i>{% endif %}</td>
                             <td>
-                                <a href=""><i class="fa fa-edit text-success"></i></a>
+                                <a href="{% url 'edit_user' user.id %}"><i class="fa fa-edit text-success"></i></a>
                                 &nbsp;
                                 <a href=""><i class="fa fa-trash text-danger"></i></a>
                             </td>
@@ -80,6 +81,9 @@
                 </tbody>
 
             </table>
+            {% else %}
+            <h2>You do not permission to view this page </h2>
+            {% endif %}
 
             
             

@@ -13,11 +13,13 @@
                     {% if '/deshboard/' == request.path %}sidebar-active{% endif %}">
                     Deshboard
                 </a>
+                {% if perms.auth.view_user %}
                 <a href="{% url 'users' %}" 
                 class="list-group-item list-group-item-action
                 {% if '/users/' in request.path %}sidebar-active{% endif %}">
                     Users
                 </a>
+                {% endif %}
                 <a href="{% url 'categories' %}"
                     class="list-group-item list-group-item-action
                     {% if '/categories/' in request.path %}sidebar-active{% endif %}">

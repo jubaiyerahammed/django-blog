@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import BlogPostForm, CategoryForm
+from .forms import AddUserForm, BlogPostForm, CategoryForm, EditUserForm
 from blogs.models import Category,Blog
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
@@ -54,7 +54,7 @@ def delete_category(request, pk):
     return redirect('categories')
  
 def posts (request):
-    posts=Blog.objects.filter(author=request.user)
+    posts=Blog.objects.all()
     context={
         'posts':posts
     }
@@ -112,3 +112,30 @@ def users(request):
         'users':users
     }
     return render (request, 'deshboard/users.html', context)
+
+def add_user (request):
+    if request.method == 'POST':
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+        else:
+            print(form.errors)
+    form=AddUserForm()
+    context={
+        'form':form,
+    }
+    return render (request, 'deshboard/add_user.html', context)
+
+def edit_user(request, pk):
+    user= get_object_or_404(User, pk=pk)
+    if request.method=='POST':
+        form=EditUserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+    form=EditUserForm(instance=user)
+    context={
+        'form':form,
+    }
+    return render (request, 'deshboard/edit_user.html', context)
