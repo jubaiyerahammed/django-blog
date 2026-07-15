@@ -29,6 +29,34 @@
         <p class="post-content">
             {{ single_blog.blog_body }}
         </p>
+        <h3>Comments({{comment_count}})</h3>
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="card mt-1">
+                    <div class="card-body">
+                        <p class="card-text mb-0">{{comment}}</p>
+                        <span>
+                            <small>by {{comment.user}}</small>
+                            <small>{{ comment.created_at | timesince }} ago</small>
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            No comments yet
+        {%endif%}
+        <br>
+
+        <div class="form-group">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form_group">
+                    <textarea name="comment" class="form-control" placeholder="write your comment" ></textarea>
+                    <input type="submit" value="Submit" class="btn btn-primary mt-2">
+                </div>
+            </form>
+
+        </div>
 
     </div>
 
